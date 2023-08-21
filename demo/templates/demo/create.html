@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %} ajout-article {% endblock %}
+
+
+
+{% block content %}
+
+
+
+<div class="container mb-5">
+    <form method="POST" class="card p-3 mt-2 myform" action="{% url 'create' %}" autocomplete="off"> 
+              {% csrf_token %}
+        <div class="row">
+            <div class="col-12">
+                    <div class="row p-2">
+                          <label for="rasion_sociale"> Nom article </label>
+                          {{form.nom_article}} 
+                    </div>
+
+                    <div class="row p-2">
+                          <label for="nom_prenom">Prix </label>
+                          {{form.prix}}
+                    </div>
+                    
+                    <div class="row p-2">
+                          <label for="phone_number">Description </label>
+                          {{form.description}}
+                    </div>
+            </div>
+
+        </div>
+
+            <div class="mt-2">
+                    <button style= "font-size: 15px;" type="submit" class="btn btn-success mb-3">
+                        <i class="fas fa-plus"></i>&nbsp;&nbsp; Valider
+                    </button>
+            </div> 
+    </form>
+</div>
+</div>
+
+
+
+{% endblock content %}

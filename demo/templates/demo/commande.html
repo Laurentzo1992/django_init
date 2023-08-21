@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block title %} commande {% endblock %}
+{% block content %}
+
+<div class="container mb-5">
+    <div class="float-sm-end">
+        <div class="mt-2">
+            <button id="btn-add" style= "font-size: 15px;" class="btn btn-warning mb-3">
+              ajouter
+            </button>
+
+            <button id="btn-remove" style= "font-size: 15px;" class="btn btn-danger mb-3">
+             retirer
+            </button>
+            
+        </div>
+    </div>
+
+    <form class="p-3 mt-2 myform" action="{% url 'commande' %}" method="post">
+    <div class="row mt-2 mb-2 p-2">
+        <div class="col-6 shadow-lg">
+            {% csrf_token %}
+
+            <div class="col-12 p-2 mt-2 text-info font-weight-bold font-italic d-flex flex-column">
+              <label for="date_commande"> Date de commande</label>
+              <input required name="date_commande" type="date" min="1" step="0.1" class="form-control" id="date_commande">
+            </div>
+
+
+            <div class="col-12 p-2 mt-2 text-info font-weight-bold font-italic d-flex flex-column">
+                <label for="fournisseur"> Client </label>
+                <select name="fournisseur" class="form-control" id="fournisseur">
+                    <option>Choisir le fournisseur . . . </option>
+                    {% for fournis in suppliers %}
+                    <option value="{{fournis.id}}">{{forloop.counter}}-{{fournis.nom_prenom}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+           
+
+            <div class="mt-2">
+              <button style= "font-size: 15px;" type="submit" class="btn btn-info mb-3">
+                 commander
+              </button>
+            </div>
+        </div>
+
+        <div class="col-6 shadow-lg">
+            <div id="wrapper">
+                <div class="ligne row p-2 mt-2 text-info font-weight-bold font-italic" id="ligne">
+                    <div class="col-4  p-2">
+                        <label for="article-1">Article</label>
+                        <select name="articles" class="form-control" id="article-1">
+                            <option> Choisir ... </option>
+                            {% for article in articles %}
+                            <option value="{{article.id}}">{{forloop.counter}}-{{article.nom_article}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-4 p-2 text-info font-weight-bold font-italic">
+                        <label for="qty-1"> Quantité</label>
+                        <input required name="quantity-1" type="number" min="1" step="0.1" class="form-control" id="qty-1">
+            
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </form> 
+
+   
+</div>
+
+
+<script type="text/javascript">
+
+    // click to add new line item 
+    
+    $(document).on('click', '#btn-add', function(){
+        
+        var number = $('#wrapper').children().length + 1;
+    
+        let formAdd = `
+
+                        <div class="ligne row p-2 mt-2 text-info font-weight-bold font-italic" id="ligne">
+                            <div class="col-4  p-2">
+                                <label for="article-${number}">Article</label>
+                                <select name="articles" class="form-control" id="article-${number}">
+                                    <option> Choisir ... </option>
+                                    {% for article in articles %}
+                                    <option value="{{article.id}}">{{forloop.counter}}-{{article.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-4 p-2 text-info font-weight-bold font-italic">
+                                <label for="qty-${number}"> Quantité</label>
+                                <input required name="quantity-${number}" type="number" min="1" step="0.1" class="form-control" id="qty-${number}">
+                    
+                            </div>
+                        </div>
+
+
+                    `;   
+                    
+        
+        $("#wrapper:last").append(formAdd);          
+    })
+    
+    
+    // Remove last item line 
+    
+    $(document).on('click', '#btn-remove', function(){
+        $("#wrapper").children().last().remove();
+    })
+
+ 
+
+    
+</script>
+
+{% endblock content %}
+
+
+
+
+
