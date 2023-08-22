@@ -1,29 +1,53 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from demo.models import Article, LigneCommande, Commande, Customer, Patient
-from django.contrib.auth.models import User
 from .forms import ArticleForm
 from  django.contrib import messages
-from django.db import transaction, models
-import datetime
-from datetime import date
+from django.db import transaction
 from django.shortcuts import render
 from twilio.rest import Client
 from django.conf import settings
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from demo.serializers import ArticleSerializer, CustomerSerializer, PatientSerializer
 from rest_framework.viewsets import ModelViewSet
+from django.contrib.auth import  login, logout, authenticate, get_user_model
+Patient = get_user_model()
+from django.views import View
+from django.http import JsonResponse
 
+
+
+class LoginView(View):
+    def post(self, request, *args, **kwargs):
+        phone = request.POST.get('phone')
+        password = request.POST.get('password')
+        
+        user = authenticate(request, phone=phone, password=password)
+        if user is not None:
+            login(request, user)
+            return JsonResponse({'message': 'Logged in successfully.'})
+        else:
+            return JsonResponse({'message': 'Invalid credentials.'}, status=401)
+
+class LogoutView(View):
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            logout(request)
+            return JsonResponse({'message': 'Logged out successfully.'})
+        else:
+            return JsonResponse({'message': 'User is not authenticated.'}, status=401)
 
 
  
 class ArticleViewset(ModelViewSet):
  
     serializer_class = ArticleSerializer
- 
+    
     def get_queryset(self):
         return Article.objects.all()
+    
+
+    
+    
     
     
 class CustomerViewset(ModelViewSet):

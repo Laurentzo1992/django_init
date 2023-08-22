@@ -3,8 +3,6 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 
 
-
-
 class PatientManager(BaseUserManager):
     def create_user(self, phone, password=None, **extra_fields):
         if not phone:

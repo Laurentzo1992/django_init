@@ -13,6 +13,9 @@ class ArticleSerializer(ModelSerializer):
         model = Article
         fields = ['id', 'nom_article', 'prix', 'description']
         
+    
+    
+        
         
         
         
