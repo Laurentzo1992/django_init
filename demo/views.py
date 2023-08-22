@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from demo.models import Article, LigneCommande, Commande, Customer
+from demo.models import Article, LigneCommande, Commande, Customer, Patient
 from django.contrib.auth.models import User
 from .forms import ArticleForm
 from  django.contrib import messages
@@ -12,7 +12,7 @@ from twilio.rest import Client
 from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from demo.serializers import ArticleSerializer, CustomerSerializer, UserSerializer
+from demo.serializers import ArticleSerializer, CustomerSerializer, PatientSerializer
 from rest_framework.viewsets import ModelViewSet
 
 
@@ -36,12 +36,12 @@ class CustomerViewset(ModelViewSet):
     
     
     
-class UserViewset(ModelViewSet):
+class PatientViewset(ModelViewSet):
  
-    serializer_class = UserSerializer
+    serializer_class = PatientSerializer
  
     def get_queryset(self):
-        return User.objects.all()
+        return Patient.objects.all()
 
 
 

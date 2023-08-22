@@ -2,7 +2,7 @@ from  . import views
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from demo.views import ArticleViewset, CustomerViewset, UserViewset
+from demo.views import ArticleViewset, CustomerViewset, PatientViewset
 
 # Ici nous créons notre routeur
 router = routers.SimpleRouter()
@@ -10,7 +10,7 @@ router = routers.SimpleRouter()
 # afin que l’url générée soit celle que nous souhaitons ‘/api/article/’
 router.register('article', ArticleViewset, basename='article')
 router.register('customer', CustomerViewset, basename='customer')
-router.register('user', UserViewset, basename='user')
+router.register('patient', PatientViewset, basename='user')
 
 
 urlpatterns = [

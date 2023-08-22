@@ -1,6 +1,11 @@
 from rest_framework.serializers import ModelSerializer
-from demo.models import Article, Customer
-from django.contrib.auth.models import User
+from demo.models import Article, Customer, Patient
+
+ 
+ 
+ 
+ #création des Serializer
+ 
  
 class ArticleSerializer(ModelSerializer):
  
@@ -19,7 +24,7 @@ class CustomerSerializer(ModelSerializer):
         
         
         
-class UserSerializer(ModelSerializer):
+class PatientSerializer(ModelSerializer):
     class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'password']
+        model = Patient
+        fields = ['id', 'phone', 'password']
