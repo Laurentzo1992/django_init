@@ -15,7 +15,7 @@ SECRET_KEY = "django-insecure--5lpsy%u&3agc$u)35#8_2mzq$cg17gkk6rh$ch-h8ao)oxd$8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', 'https://b545-197-239-64-129.ngrok-free.app/api/article/', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -153,6 +153,11 @@ TWILIO_AUTH_TOKEN = '98bc0aa5112826c36639f84627a189ba'
 #Configurer les origines autorisées 
 CORS_ALLOW_ALL_ORIGINS = True  # Autorise toutes les origines (à ajuster selon vos besoins)
 
+
+""" CORS_ALLOWED_ORIGINS = [
+    "https://69e2-197-239-64-129.ngrok-free.app",  # Remplacez cela par l'URL de votre client
+]
+ """
 
 
 
