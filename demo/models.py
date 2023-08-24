@@ -30,8 +30,6 @@ class PatientManager(BaseUserManager):
 class Patient(AbstractUser):
     phone = models.CharField(max_length=15, unique=True, verbose_name='Téléphone')
     date_naissance = models.DateField(null=True, blank=True, verbose_name='Date de naissance')
-    first_name = None
-    last_name = None
     username = None
     
     USERNAME_FIELD = 'phone'

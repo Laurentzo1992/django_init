@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>odc </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="" type="image/x-icon">
+		<link rel="icon" href="" type="image/x-icon">
+    	<link rel="shortcut icon" href="">
+        <link rel="stylesheet" href="">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+     </head>
+    <body>
+
+        
+
+
+    <script>
+                // URL de l'API
+                const apiUrl = 'http://127.0.0.1:8000/api/article/';
+
+                // Appel de l'API en utilisant fetch
+                fetch(apiUrl)
+                .then(response => {
+                    // Vérifier si la réponse est OK (statut 200)
+                    if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
+                    }
+                    api_data = response.json();
+                    console.log(api_data)
+                    return api_data; // Convertir la réponse en JSON
+                   
+                })
+                .then(data => {
+                    console.log('Données de l\'API:', data);
+                    // Faites quelque chose avec les données ici
+                })
+                .catch(error => {
+                    console.error('Erreur lors de l\'appel à l\'API:', error);
+                });
+    </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

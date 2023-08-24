@@ -30,4 +30,4 @@ class CustomerSerializer(ModelSerializer):
 class PatientSerializer(ModelSerializer):
     class Meta:
         model = Patient
-        fields = ['id', 'phone', 'password']
+        fields = ['id', 'phone', 'password', 'first_name', 'last_name']

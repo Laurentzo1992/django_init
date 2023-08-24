@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "demo",
     "rest_framework",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -39,6 +40,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = "odc.urls"
@@ -145,6 +148,11 @@ AUTH_USER_MODEL = 'demo.Patient'
 
 TWILIO_ACCOUNT_SID = 'AC15fbce0675e82420dce584d408ca97ce'
 TWILIO_AUTH_TOKEN = '98bc0aa5112826c36639f84627a189ba'
+
+
+#Configurer les origines autorisées 
+CORS_ALLOW_ALL_ORIGINS = True  # Autorise toutes les origines (à ajuster selon vos besoins)
+
 
 
 
