@@ -1,40 +1,48 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from demo.models import Article, LigneCommande, Commande, Customer, Patient
+from demo.models import Article, LigneCommande, Commande, Customer, User
 from .forms import ArticleForm
 from  django.contrib import messages
 from django.db import transaction
-from django.shortcuts import render
 from twilio.rest import Client
 from django.conf import settings
 from demo.serializers import ArticleSerializer, CustomerSerializer, PatientSerializer
 from rest_framework.viewsets import ModelViewSet
-from django.contrib.auth import  login, logout, authenticate, get_user_model
-Patient = get_user_model()
+from django.contrib.auth import  login, logout, authenticate, get_user_model, logout
+User = get_user_model()
 from django.views import View
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
+from . import forms
+from django.urls import reverse
 
 
 
-class LoginView(View):
-    def post(self, request, *args, **kwargs):
-        phone = request.POST.get('phone')
+def login_page(request):
+    message = ''  # Initialisation de la variable message
+    if request.method == 'POST':
+        username = request.POST.get('username')
         password = request.POST.get('password')
+        if username and password:
+            user = authenticate(
+                request=request,
+                username=username,
+                password=password,
+            )
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse('home'))  # Redirection vers la page d'accueil
+            else:
+                message = 'Identifiants invalides.'
+    return render(
+        request, 'demo/login.html', context={'message': message}
         
-        user = authenticate(request, phone=phone, password=password)
-        if user is not None:
-            login(request, user)
-            return JsonResponse({'message': 'Logged in successfully.'})
-        else:
-            return JsonResponse({'message': 'Invalid credentials.'}, status=401)
+    )
 
-class LogoutView(View):
-    def post(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            logout(request)
-            return JsonResponse({'message': 'Logged out successfully.'})
-        else:
-            return JsonResponse({'message': 'User is not authenticated.'}, status=401)
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+    
 
 
  
@@ -65,7 +73,7 @@ class PatientViewset(ModelViewSet):
     serializer_class = PatientSerializer
  
     def get_queryset(self):
-        return Patient.objects.all()
+        return User.objects.all()
 
 
 
@@ -142,7 +150,6 @@ def commande(request):
                 number += 1
                 quantity = int(request.POST.get(f'quantity-{number}'))
                 article = Article.objects.get(id=article_id)
-                # Vérifiez si la quantité demandée est disponible
                 article.save()
 
                 LigneCommande.objects.create(commande=commande,

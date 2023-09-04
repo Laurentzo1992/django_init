@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from demo.models import Article, Customer, Patient
+from demo.models import Article, Customer, User
 
  
  
@@ -29,5 +29,5 @@ class CustomerSerializer(ModelSerializer):
         
 class PatientSerializer(ModelSerializer):
     class Meta:
-        model = Patient
-        fields = ['id', 'phone', 'password', 'first_name', 'last_name']
+        model = User
+        fields = ['id', 'phone', 'email', 'password', 'first_name', 'last_name']

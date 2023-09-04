@@ -91,7 +91,7 @@
                                 <select name="articles" class="form-control" id="article-${number}">
                                     <option> Choisir ... </option>
                                     {% for article in articles %}
-                                    <option value="{{article.id}}">{{forloop.counter}}-{{article.name}}</option>
+                                    <option value="{{article.id}}">{{forloop.counter}}-{{article.nom_article}}</option>
                                     {% endfor %}
                                 </select>
                             </div>

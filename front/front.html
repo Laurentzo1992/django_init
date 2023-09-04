@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>odc </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="" type="image/x-icon">
+		    <link rel="icon" href="" type="image/x-icon">
+    	  <link rel="shortcut icon" href="">
+        <link rel="stylesheet" href="styles.css">
+        <!-- fontAwesome-->
+    	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+     </head>
+    <body>
+     
+     
+      <nav class="navbar navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Gestion documentaire</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+            <i class="fa fa-home" aria-hidden="true"></i>
+          </button>
+          <div class="offcanvas offcanvas-end text-bg-secondary" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </li>
+              </ul>
+              
+            </div>
+          </div>
+        </div>
+      </nav>
+        
+        <div class="container-fluid mt-5">
+        <div class="row">
+          <form class="row g-3 mt-3 ms-2" id="api_request">
+
+            <div class="row mt-3">
+              <div class="col-md-4">
+                  <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend3">Nom</span>
+                      <input type="text" class="form-control" id="last_name" name="last_name" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+                      <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                      
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend3">Prenom</span>
+                      <input type="text" class="form-control" id="first_name" name="first_name" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+                      <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+            <div class="row mt-3">
+                <div class="col-md-4">
+                  <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend3">Téléphone</span>
+                      <input type="text" class="form-control" id="phone" name="phone" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+                      <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                          
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="input-group has-validation">
+                      <span class="input-group-text" id="inputGroupPrepend3">Password</span>
+                      <input type="text" class="form-control" id="password" name="password" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+                      <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                          
+                      </div>
+                  </div>
+                </div>
+            </div>
+            
+            <div class="col-12 mb-2">
+              <button class="btn btn-primary" type="submit" id="env1">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+        <div class="row mt-2 mx-4">
+            <table class="table table-striped table-hover table-bordered border-danger" id="data-table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Téléphone</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    
+                  </tr>
+                </tbody>
+              </table>
+              <!-- Liens de pagination -->
+              <div class="pagination">
+                <button id="previousPageButton" class="btn btn-success mx-2">Précédente</button>
+
+                <button id="nextPageButton" class="btn btn-success mx-2">Suivante</button>
+              </div>
+        </div>
+        </div>
+        </div>
+
+          
+
+    <script src="get.js"></script>
+    <script src="htmx.min.js"></script>
+    <script src="add.js"></script>
+    <script src="put_del.js"></script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

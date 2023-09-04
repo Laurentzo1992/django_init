@@ -3,10 +3,25 @@ from demo.models import Article
 from django.core.validators import RegexValidator
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import ReadOnlyPasswordHashField, UserCreationForm
-from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
+Patient = get_user_model()
 
-User = get_user_model()
+class ArticleForm(forms.ModelForm):
+    
+    nom_article = forms.CharField(
+        label='Nom',
+        widget=forms.TextInput(attrs={'placeholder': 'Nom de l\'article'})
+    )
+    
+
+    class Meta:
+        model = Article
+        fields = '__all__'
+        
+        
+
+
+
 
 class RegisterForm(forms.ModelForm):
     """
@@ -18,18 +33,18 @@ class RegisterForm(forms.ModelForm):
     password_2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
-        model = User
-        fields = ['email']
+        model = Patient
+        fields = ['phone']
 
     def clean_email(self):
         '''
-        Verify email is available.
+        Verify phone is available.
         '''
-        email = self.cleaned_data.get('email')
-        qs = User.objects.filter(email=email)
+        phone = self.cleaned_data.get('phone')
+        qs = Patient.objects.filter(phone=phone)
         if qs.exists():
-            raise forms.ValidationError("l'e-mail est pris")
-        return email
+            raise forms.ValidationError("le numero est pris")
+        return phone
 
     def clean(self):
         '''
@@ -52,8 +67,8 @@ class UserAdminCreationForm(forms.ModelForm):
     password_2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
-        model = User
-        fields = ['email']
+        model = Patient
+        fields = ['phone']
 
     def clean(self):
         '''
@@ -83,28 +98,14 @@ class UserAdminChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
     class Meta:
-        model = User
-        fields = ['email', 'password', 'is_active', 'admin']
+        model = Patient
+        fields = ['phone', 'password', 'is_active']
 
     def clean_password(self):
     # Indépendamment de ce que l'utilisateur fournit, renvoie la valeur initiale.
     # Cela se fait ici, plutôt que sur le terrain, car le
     # le champ n'a pas accès à la valeur initiale
         return self.initial["password"]
-
-class ArticleForm(forms.ModelForm):
-    
-    nom_article = forms.CharField(
-        label='Nom',
-        widget=forms.TextInput(attrs={'placeholder': 'Nom de l\'article'})
-    )
-    
-
-    class Meta:
-        model = Article
-        fields = '__all__'
         
         
-class CreatePatient(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model: get_user_model
+        

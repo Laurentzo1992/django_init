@@ -10,11 +10,13 @@ router = routers.SimpleRouter()
 # afin que l’url générée soit celle que nous souhaitons ‘/api/article/’
 router.register('article', ArticleViewset, basename='article')
 router.register('customer', CustomerViewset, basename='customer')
-router.register('patient', PatientViewset, basename='user')
+router.register('patient', PatientViewset, basename='patient')
 
 
 urlpatterns = [
-    path('',  views.home, name='home'),
+    path('',  views.login_page, name='login'),
+    path('logout_user',  views.logout_user, name='logout_user'),
+    path('home',  views.home, name='home'),
     path('create',  views.create, name='create'),
     path('commande',  views.commande, name='commande'),
     path('envoyer_message',  views.envoyer_message, name='envoyer_message'),

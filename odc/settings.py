@@ -142,13 +142,19 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "odc/static/media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = 'demo.Patient'
+AUTH_USER_MODEL = 'demo.User'
 
 #Twilo config
 
 TWILIO_ACCOUNT_SID = 'AC15fbce0675e82420dce584d408ca97ce'
 TWILIO_AUTH_TOKEN = '98bc0aa5112826c36639f84627a189ba'
 
+
+##############################################################
+
+# Start rest framework conf 
+
+###############################################################
 
 #Configurer les origines autorisées 
 CORS_ALLOW_ALL_ORIGINS = True  # Autorise toutes les origines (à ajuster selon vos besoins)
@@ -158,6 +164,17 @@ CORS_ALLOW_ALL_ORIGINS = True  # Autorise toutes les origines (à ajuster selon 
     "https://69e2-197-239-64-129.ngrok-free.app",  # Remplacez cela par l'URL de votre client
 ]
  """
+ 
+ 
+# Pour retirer le slash à la fin
+
+APPEND_SLASH=True
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 5
+}
 
 
 
